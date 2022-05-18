@@ -40,6 +40,9 @@ age, smile, moustache, beard, sideburns, mask, headWear, glasses, head_roll, hea
 - Scipy == 1.7.1
 - Seaborn == 0.11.2
 
+In order to install all the necessary prerequisites, you can simply execute the following command: \
+`pip install -r requirements.txt`
+
 ## Model Training
 See <a href="training/README.md" target="_blank">README</a> in <a href="training" target="_blank">training folder</a>
 ## Model Evaluation
