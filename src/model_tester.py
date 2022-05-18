@@ -1,10 +1,10 @@
 import datetime
 import sys
-#from training.train import FaceModel
-#from models_definitions.backbone.backbone_def import BackboneFactory
-#from models_definitions.head.head_def import HeadFactory
 sys.path.append('../')
 sys.path.append('../../')
+from training.train import FaceModel
+from models_definitions.backbone.backbone_def import BackboneFactory
+from models_definitions.head.head_def import HeadFactory
 import torch
 from torch.utils.data import DataLoader
 from data_processor.train_dataset import ImageDataset
@@ -99,7 +99,10 @@ def load_model(model_path):
     except:
         pass
     model.eval()
-    device = torch.device('cuda:0')
+    try:
+        device = torch.device('cuda:0')
+    except:
+        device = torch.device('cpu')
     return model, device
 
 
@@ -143,7 +146,7 @@ def get_graphs_and_matrices(cosines, group_ref, m, path):
     l = len(groups)
     labels = ["AM", "AW", "BM", "BW", "CM", "CW"]
     colors = ["red", "orange", "blue", "yellow", "violet", "black"]
-    rows= l // 3
+    rows = l // 3
     cols = l // rows
     fig1, axs1 = plt.subplots(rows, cols, facecolor='white')
     fig1.set_size_inches((15, 10))
@@ -171,11 +174,11 @@ def get_graphs_and_matrices(cosines, group_ref, m, path):
         axis.set_title(" - ".join(['Equal Error Rate', labels[group]]))
         axis.plot(np.sort(fpr)[::-1], label="FAR")  # Sorted in ascending order
         axis.plot(np.sort(fnr), label="FRR")
-        axis.axvline(x=(np.abs(thresholds[::-1] - thresh)).argmin(),label='EER = %0.3f' % eer, color="red")
+        axis.axvline(x=(np.abs(thresholds[::-1] - thresh)).argmin(), label='EER = %0.3f' % eer, color="red")
         axis.set_ylabel('Error')
         axis.set_xlabel('Security Threshold')
         step = int(len(thresholds) / 5)
-        axis.set_xticks(list(range(len(thresholds)))[::step],np.round(thresholds[::-step], 2))
+        axis.set_xticks(list(range(len(thresholds)))[::step], np.round(thresholds[::-step], 2))
         axis.set_box_aspect(1.0)
         axis.legend(loc="upper center")
         ##############################################
@@ -205,7 +208,8 @@ def get_graphs_and_matrices(cosines, group_ref, m, path):
             axs2[row, 1].legend(loc='best')
             axs2[row, 1].set_xlim(0, 1.4)
             axs2[row, 1].set_ylim(0, 7)
-        eer_auc_far_frr_far1_frr1[:, grp_idx] = eer, roc_auc, fpr[idx_far_frr], fnr[idx_far_frr], fpr[idx_f1], fnr[idx_f1]
+        eer_auc_far_frr_far1_frr1[:, grp_idx] = eer, roc_auc, fpr[idx_far_frr], fnr[idx_far_frr], fpr[idx_f1], fnr[
+            idx_f1]
         del subset, subset_norm
     fig1.savefig(os.path.join(path, 'FAR_FRR_ERR.png'), dpi=fig1.dpi)
     fig2.savefig(os.path.join(path, 'AUC_CosDensities.png'), dpi=fig2.dpi)
@@ -370,7 +374,7 @@ def pipeline(args):
         os.makedirs(directory)
         if comparison.endswith(".csv"):
             print("Preparing test files...")
-            dl_ref, dl_cmp, group_ref, group_cmp , ref_id = csv_to_test(comparison, bp)
+            dl_ref, dl_cmp, group_ref, group_cmp, ref_id = csv_to_test(comparison, bp)
             print("Inferencing dataset...")
             ref, cmp, matches = inference(dl_ref, dl_cmp, device, model)
             m = matches.flatten()
@@ -403,8 +407,6 @@ if __name__ == '__main__':
                             help='path to list of csv files')
         parser.add_argument('--base', metavar='path', required=True,
                             help='path to dataset basepath')
-        parser.add_argument('--outpath', metavar='path', required=True,
-                            help='output path')
         args = parser.parse_args()
         if args.models is None and args.model is None:
             raise Exception

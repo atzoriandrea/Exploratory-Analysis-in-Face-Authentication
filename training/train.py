@@ -1,8 +1,3 @@
-"""
-@author: Jun Wang
-@date: 20201019
-@contact: jun21wangustc@gmail.com
-"""
 import os
 import torchmetrics
 import sys
