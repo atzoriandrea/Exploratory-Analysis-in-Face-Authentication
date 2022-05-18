@@ -1,5 +1,11 @@
-# Exploratory-Analysis-in-Face-Authentication
+# Explaining Disparate Impacts in Face Recognition via Image Characteristics
 
+This is the official repository of the paper entitles "Explaining Disparate Impacts in Face Recognition via Image Characteristics".
+<br>
+<div align="center">
+ <img src="./images/overview.png"  width="650" alt="ROC curve Example"/> 
+</div>
+<br>
 
 This is a Pytorch toolbox for Face Recognition training and testing. 
 It provides a training part with various SOTA Face Recognition backbones and heads and
@@ -27,7 +33,7 @@ an evaluation part that:
 - Provides Linear Regression modules in order to weight the given attributes accordingly to a given metric
 
 ## Dataset
- Here we provide two annotated <a href="https://drive.google.com/drive/folders/1LNLOO157NPUOAfCWDtMxJpmDVkbn8eu4?usp=sharing" target="_blank">Datasets</a>
+ Here we provide two <a href="https://drive.google.com/drive/folders/1LNLOO157NPUOAfCWDtMxJpmDVkbn8eu4?usp=sharing" target="_blank">Datasets</a>
  (DiveFace, VGG-Face2 test set) annotated with a lot of attributes. Namely:
 age, smile, moustache, beard, sideburns, mask, headWear, glasses, head_roll, head_yaw, head_pitch, eye_makeup, lip_makeup, forehead_occluded, eye_occluded, mouth_occluded, blur, exposure, noise
 
