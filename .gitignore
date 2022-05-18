@@ -133,4 +133,4 @@ venv/*
 *.txt
 *.zip
 *.npy
-*.png
+
