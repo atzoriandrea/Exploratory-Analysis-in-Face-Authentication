@@ -14,7 +14,7 @@ an evaluation part that:
 - Provides metrics as FAR and FRR variation across multiple factors like sex and ethnicity and their combinations
 <br>
 <div align="center">
- <img src="images/net1.png"  height="170" width="550" alt="Table Example 1"/> <img src="images/net2.png"  height="170" width="550" alt="Table Example 2"/>
+ <img src="images/net1.png"  height="130" width="450" alt="Table Example 1"/> <img src="images/net2.png"  height="130" width="450" alt="Table Example 2"/>
 </div>
 <br>
 
