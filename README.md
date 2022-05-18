@@ -3,7 +3,7 @@
 This is the official repository of the paper entitles "Explaining Disparate Impacts in Face Recognition via Image Characteristics".
 <br>
 <div align="center">
- <img src="./images/overview.png"  width="650" alt="ROC curve Example"/> 
+ <img src="./images/overview.png"  width="750" alt="ROC curve Example"/> 
 </div>
 <br>
 
