@@ -1,13 +1,13 @@
 # Explaining Disparate Impacts in Face Recognition via Image Characteristics
 
-This is the official repository of the paper entitles "Explaining Disparate Impacts in Face Recognition via Image Characteristics".
+This is the official repository of the paper entitled "Explaining Disparate Impacts in Face Recognition via Image Characteristics".
 <br>
 <div align="center">
  <img src="./images/overview.png"  width="750" alt="ROC curve Example"/> 
 </div>
 <br>
 
-This is a Pytorch toolbox for Face Recognition training and testing. 
+We provide a Pytorch toolbox for Face Recognition training and testing. 
 It provides a training part with various SOTA Face Recognition backbones and heads and
 an evaluation part that:
 - Provides evaluations of the given model(s) in order to obtain metrics like ROC curves, AUCs, EERs, EERs@FAR1% etc.
