@@ -7,7 +7,7 @@ an evaluation part that:
 - Provides evaluations of the given model(s) in order to obtain metrics like ROC curves, AUCs, EERs, EERs@FAR1% etc.
 <br>
 <div align="center">
- <img src="images/ROC.png" height="250" width="250" alt="ROC curve Example"/> <img src="images/EER.png" height="250" width="250" alt="EER graph Example"/>
+ <img src="./images/ROC.png" height="250" width="250" alt="ROC curve Example"/> <img src="./images/EER.png" height="250" width="250" alt="EER graph Example"/>
 </div>
 <br>
 
