@@ -51,6 +51,10 @@ In order to install all the necessary prerequisites, you can simply execute the 
 
 ## Model Training
 See <a href="training/README.md" target="_blank">README</a> in <a href="training" target="_blank">training folder</a>
+
+## Dataset Preprocessing and combined models training
+See <a href="src/README.md" target="_blank">README</a> in <a href="src" target="_blank">src</a> folder
+
 ## Model Evaluation
  Notes to various scripts WIP
 

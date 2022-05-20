@@ -41,6 +41,8 @@ if __name__ == '__main__':
                             help='path to dataset basepath')
         parser.add_argument('--train_file', metavar='path', required=True,
                             help='path to train file')
+        parser.add_argument('--outfolder', metavar='path', required=True,
+                            help='path to train file')
         args = parser.parse_args()
 
         backbone_conf_file = '../training_mode/backbone_conf.yaml'
@@ -55,7 +57,7 @@ if __name__ == '__main__':
         for b in backbones:
             for h in heads:
                 try:
-                    out_dir = os.path.join("/home/andrea/Scrivania/models", "+".join([b, h]))#"/home/andreaatzori/models"
+                    out_dir = os.path.join(args.outfolder, "+".join([b, h]))
                     if not os.path.exists(out_dir):
                         os.makedirs(out_dir)
                     conf = get_conf(args, b, backbone_conf_file, h, head_conf_file, lr, out_dir, epochs, step, batch_size)
