@@ -58,9 +58,20 @@ See <a href="src/README.md" target="_blank">README</a> in <a href="src" target="
 ## Model Evaluation
  Notes to various scripts WIP
 
+## Contributing
+This code is provided for educational purposes and aims to facilitate reproduction of our results, and further research in this direction. We have done our best to document, refactor, and test the code before publication.
+
+If you find any bugs or would like to contribute new models, training protocols, etc, please let us know.
+
+Please feel free to file issues and pull requests on the repo and we will address them as we can.
+
 ## License
 
-This repository is published under GNU GENERAL PUBLIC LICENSE, Version 3
+This code is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This software is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for details.
+
+You should have received a copy of the GNU General Public License along with this source code. If not, go the following link: http://www.gnu.org/licenses/.
 
 
 
