@@ -380,6 +380,9 @@ def pipeline(args):
             m = matches.flatten()
             cos = torch.nn.CosineSimilarity(dim=1, eps=1e-6)
             results = cos(ref, cmp)
+            np_res = np.vstack([results.numpy(), m.numpy(), group_ref, group_cmp, list(map(int, ref_id))]).T
+            outcos = os.path.join([directory, "inferenced_cosines", "_".join([model_t, "_results_", filename, ".npy"])])
+            np.save(outcos, np_res)
         elif comparison.endswith(".npy"):
             data = torch.tensor(np.load(comparison))
             results = data[:, 0]

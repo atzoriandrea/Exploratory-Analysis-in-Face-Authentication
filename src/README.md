@@ -4,6 +4,8 @@
  - `--cmps` : path of the .csv file in which all couples are listed
  - `--base` : path to dataset basepath
 
+NOTE: this script returns also the inferenced cosines and other useful data for each given image pair
+
 
 ### preprocess.py parameters description
  - `--imgs` : dataset basepath (or image folder) that  you want to preprocess
