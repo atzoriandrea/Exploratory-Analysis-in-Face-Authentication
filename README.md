@@ -56,7 +56,8 @@ See <a href="training/README.md" target="_blank">README</a> in <a href="training
 See <a href="src/README.md" target="_blank">README</a> in <a href="src" target="_blank">src</a> folder
 
 ## Model Evaluation
- Notes to various scripts WIP
+See <a href="src/experiments/README.md" target="_blank">README</a> in <a href="src/experiments" target="_blank">src/experiments</a> folder
+
 
 ## Contributing
 This code is provided for educational purposes and aims to facilitate reproduction of our results, and further research in this direction. We have done our best to document, refactor, and test the code before publication.

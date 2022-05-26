@@ -51,3 +51,37 @@ def counter(npy_file, csv_file):
         except:
             pass
     return errors_by_group
+
+def get_data_means(errors):
+    data_means = []
+    other_info = ['FR', 'FA', 'TR', 'TA', 'row_in_file','similarity']
+    genre_eth = {0:["Male","Asian"], 1:["Female","Asian"],2:["Male","Black"],3:["Female","Black"],4:["Male","Caucasian"],5:["Female","Caucasian"]}
+    cols = ['Identity'] + keys + other_info
+    for grp_idx, group in enumerate(errors):
+        df0 = pd.DataFrame(group, columns=cols)
+        df0 = df0.drop(columns=['row_in_file'])
+        df_feat = df0[list(set(cols).difference(other_info).difference([keys[x] for x in binary_features]))]
+        df_feat_mean = df_feat.groupby(['Identity']).mean()
+        try:
+            df_feat2 = df0[list(set(cols).difference(other_info).difference([keys[x] for x in continuouous_features]))].drop(columns=['group'])
+        except:
+            df_feat2 = df0[list(set(cols).difference(other_info).difference([keys[x] for x in continuouous_features]))]
+        #df_feat2 = df_feat2.replace({True: 1.0, False: 0.0})
+        df_feat2_mean = df_feat2.groupby(['Identity']).agg(lambda x: stats.mode(x)[0])
+        df_data = df0[['Identity','FR', 'FA', 'TR', 'TA']]
+        df_similarities = df0[['Identity','similarity']]
+        df_similarities_list_genuine = df_similarities.groupby('Identity')['similarity'].apply(list).apply(lambda x : np.mean(x[:5])).to_frame()
+        df_similarities_list_imposter = df_similarities.groupby('Identity')['similarity'].apply(list).apply(lambda x : np.mean(x[5:])).to_frame()
+        df_similarities_list = df_similarities_list_genuine.join(df_similarities_list_imposter, on='Identity',lsuffix='_genuine', rsuffix='_imposter')
+        df_data_sum = df_data.groupby(['Identity']).sum()
+        df_tot = df_feat_mean.join(df_data_sum, on='Identity')
+        df_tot = df_tot.join(df_feat2_mean, on='Identity')
+        df_tot = df_tot.join(df_similarities_list, on='Identity')
+        df_tot['group'] = grp_idx
+        df_tot[['genre', 'ethnicity']] = genre_eth[grp_idx]
+        df_tot['FA'] = df_tot['FA']/50
+        df_tot['TR'] = df_tot['TR']/50
+        df_tot['FR'] = df_tot['FR']/5
+        df_tot['TA'] = df_tot['TA']/5
+        data_means.append(df_tot)
+    return pd.concat(data_means)
