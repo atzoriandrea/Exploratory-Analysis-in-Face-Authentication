@@ -1,5 +1,6 @@
 from get_data_means import *
 import copy
+import datetime
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -158,7 +159,7 @@ if __name__ == '__main__':
                             help='txt file containing results files paths')
         parser.add_argument('--csv', metavar='path', required=True,
                             help='path to csv file listing all pairs')
-        parser.add_argument('--suffix', metavar='path', required=False, default=""
+        parser.add_argument('--suffix', metavar='path', required=False, default=datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
                             )
         parser.add_argument('--iterations', metavar='path', required=False, default=100,
                             help='iterations for samples picking')

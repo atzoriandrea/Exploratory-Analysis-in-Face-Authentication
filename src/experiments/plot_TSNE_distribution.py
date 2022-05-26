@@ -63,9 +63,9 @@ if __name__ == '__main__':
         parser.add_argument('--jsonsf', metavar='path', required=True,
                             help='path to images')
         parser.add_argument('--results', metavar='path', required=True,
-                            help='path to images')
+                            help='')
         parser.add_argument('--csv', metavar='path', required=True,
-                            help='path to images')
+                            help='')
         args = parser.parse_args()
         if args.jsonsf == "" or args.results == "" or args.csv == "":
             print("Please, check your input parameters")

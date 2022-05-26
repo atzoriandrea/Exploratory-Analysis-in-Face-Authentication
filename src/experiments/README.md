@@ -9,6 +9,15 @@
 ## features_merge.py 
 This file contains a library function that returns a Pandas Dataframe with image embeddings and protected attributes for each image
 
+
+## get_metrics_across_groups.py
+This script returns (in latex format), a cross sensitive-attribute analisys on given data (see FAR and FRR tables in main page)
+### Parameters
+ - `--jsonsf` : path to the json file containing all annotations for your dataset
+ - `--results` : path to .npy file containing the results obtained by pairs comparison
+ - `--csv` : path of the .csv file in which all image pairs are listed
+ - `--save` : (optional) if True, the table will be saved as .txt file. Otherwise, it will be printed.
+
 ## get_info_on_results.py
  This script plots, for each run (you MUST give as input a list of results belonging to the same dataset): 
 - The correlation value(s) between attributes and metrics like FAR (False Acceptance Rate) and FRR (False Rejection Rate) (see last figure on main page)
