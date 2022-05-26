@@ -5,7 +5,8 @@ import numpy as np
 import sys
 import pandas as pd
 from sklearn.manifold import TSNE
-from experimental_menagerie_predictor_trainer import prepare_data
+#from experimental_menagerie_predictor_trainer import prepare_data
+
 
 def prepare_data():
     emb_fs1 = pd.DataFrame(np.hstack(

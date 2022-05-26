@@ -1,3 +1,7 @@
+import argparse
+import os
+import sys
+
 from get_data_means import *
 import copy
 import datetime
@@ -18,7 +22,7 @@ def get_pattern(p_value):
         new_value = "\\"
     elif p_value < 0.05:
         new_value = "o"
-    else :
+    else:
         new_value = ""
     return new_value
 
@@ -36,12 +40,12 @@ def z_score_normalize(data_ori, mean_stddev):
         if mean_stddev[1, i] != 0:
             data[:, i] = (data[:, i] - mean_stddev[0, i]) / mean_stddev[1, i]
         else:
-            print("Attribute %d has mean %f and std dev %f" % (i,mean_stddev[0, i],mean_stddev[1, i] ))
+            print("Attribute %d has mean %f and std dev %f" % (i, mean_stddev[0, i], mean_stddev[1, i]))
     return data
 
 
 def get_r2_and_coeffs(r2, coeff, models_names, features_list):
-    df_list1, df_list2 = [],[]
+    df_list1, df_list2 = [], []
     for i, scores in enumerate(r2):
         data = pd.DataFrame({'R2 Scores': scores})
         data['Model'] = models_names[i]
@@ -69,14 +73,14 @@ def plot_correlations(model_data, models_names, selected_measure, dataset_name):
         md['ethnicity'] = md['ethnicity'].replace({"Asian": 0, "Black": 1, "Caucasian": 2})
         for feature in features_list:
             r = stats.pearsonr(md[feature], md[selected_measure])
-            pv = get_asterisc(r[1])
+            pv = get_pattern(r[1])
             df = df.append({'Correlation': r[0], 'Model': models_names[i], 'Feature': feature, 'PValue': r[1],
                             'PValueTxt': pv}, ignore_index=True)
     ax2 = sns.barplot(data=df, y='PValue', x='Feature', hue='Model')
     fig = plt.figure(figsize=(30, 8), facecolor='white')
     plt.rcParams.update({'font.size': 22})
     sns.set_style("whitegrid")
-    #plt.ylim((-0.16, 0.05))
+    # plt.ylim((-0.16, 0.05))
     ax1 = sns.barplot(data=df, y='Correlation', x='Feature', hue='Model')
     plt.legend(ncol=5)
     p1 = ax1.patches
@@ -87,9 +91,9 @@ def plot_correlations(model_data, models_names, selected_measure, dataset_name):
     plt.xticks(rotation=25)
     folder_base_name = "Correlations"
     folder_name = folder_base_name if dataset_name == "" else "_".join([folder_base_name, dataset_name])
-    if not os.path.exist(folder_name):
+    if not os.path.exists(folder_name):
         os.mkdir(folder_name)
-    plt.savefig(os.path.join(folder_name, "_".join(["Correlations",selected_measure+"R.png"])), bbox_inches='tight')
+    plt.savefig(os.path.join(folder_name, "_".join(["Correlations", selected_measure + "R.png"])), bbox_inches='tight')
 
 
 def plot_r2(R2_df, dataset_name):
@@ -100,9 +104,10 @@ def plot_r2(R2_df, dataset_name):
     sns.boxplot(data=R2_df, y='R2 Scores', x='Model')
     plt.xticks(rotation=25)
 
-    if not os.path.exist(folder_name):
+    if not os.path.exists(folder_name):
         os.mkdir(folder_name)
-    plt.savefig(os.path.join(folder_name, "_".join([folder_name,selected_measure+"R.png"])), bbox_inches='tight')
+    plt.savefig(os.path.join(folder_name, "_".join([folder_name, selected_measure + "R.png"])), bbox_inches='tight')
+
 
 def plot_coeffs(COEFF_df, dataset_name):
     folder_base_name = "Feature_Weights"
@@ -114,10 +119,9 @@ def plot_coeffs(COEFF_df, dataset_name):
     data = COEFF_df.groupby('Model').mean().T
     ax = sns.heatmap(data=data)
     plt.xticks(rotation=25)
-    if not os.path.exist(folder_name):
+    if not os.path.exists(folder_name):
         os.mkdir(folder_name)
-    plt.savefig(os.path.join(folder_name, "_".join([folder_name,selected_measure+"R.png"])), bbox_inches='tight')
-
+    plt.savefig(os.path.join(folder_name, "_".join([folder_name, selected_measure + "R.png"])), bbox_inches='tight')
 
 
 def plot_feature_weights(model_data, models_names, selected_measure, iterations, n_samples, dataset_name):
@@ -144,10 +148,9 @@ def plot_feature_weights(model_data, models_names, selected_measure, iterations,
             del reg
         R2.append(R2_scores)
         COEFF.append(coefficients)
-    R2_df, COEFF_df = get_r2_and_coeffs(R2,COEFF, models_names, features_list)
+    R2_df, COEFF_df = get_r2_and_coeffs(R2, COEFF, models_names, features_list)
     plot_r2(R2_df, dataset_name)
     plot_coeffs(COEFF_df, dataset_name)
-
 
 
 if __name__ == '__main__':
@@ -159,7 +162,8 @@ if __name__ == '__main__':
                             help='txt file containing results files paths')
         parser.add_argument('--csv', metavar='path', required=True,
                             help='path to csv file listing all pairs')
-        parser.add_argument('--suffix', metavar='path', required=False, default=datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        parser.add_argument('--suffix', metavar='path', required=False,
+                            default=datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
                             )
         parser.add_argument('--iterations', metavar='path', required=False, default=100,
                             help='iterations for samples picking')
@@ -171,14 +175,18 @@ if __name__ == '__main__':
     except Exception as e:
         print(e)
         sys.exit(1)
+    with open(args.jsonsf, 'r') as fp:
+        json_file = json.load(fp)
+    keys = list(json_file[list(json_file.keys())[0]].keys())
     selected_measures = ['FA', 'FR']
     errors_list = []
     model_data = []
     models_names = [x.strip().split("/")[-1].split("_")[0] for x in args.results_list]
     for mr in args.results_list:
-        errors_list.append(counter(mr, args.csv))
+        errors_list.append(counter(json_file, mr, args.csv, keys))
     for el in errors_list:
-        model_data.append(get_data_means(el))
+        model_data.append(get_data_means(el, keys))
     for selected_measure in selected_measures:
         plot_correlations(model_data, models_names, selected_measure, args.dataset_name)
-        plot_feature_weights(model_data, models_names, selected_measure, int(args.iterations), int(args.n_samples), args.dataset_name)
+        plot_feature_weights(model_data, models_names, selected_measure, int(args.iterations), int(args.n_samples),
+                             args.dataset_name)

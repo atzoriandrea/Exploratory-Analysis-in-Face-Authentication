@@ -1,5 +1,6 @@
 import datetime
 import sys
+
 sys.path.append('../')
 sys.path.append('../../')
 from training.train import FaceModel
