@@ -3,11 +3,7 @@ import multiprocessing
 import os.path
 import sys
 import time
-from multiprocessing.managers import BaseManager
-
 import cv2
-import numpy as np
-import torch
 from deepface import DeepFace
 
 
