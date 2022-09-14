@@ -237,8 +237,12 @@ def get_graphs_and_matrices(cosines, group_ref, m, path):
 
 def get_heatmaps(eer_auc_far_frr_far1_frr1, path, groups):
     eer, auc, far, frr, far1, frr1 = eer_auc_far_frr_far1_frr1
-    labels_tot = ["AM", "AW", "BM", "BW", "CM", "CW"]
-    labels = [labels_tot[i] for i in groups]
+    if l == 6:
+        labels = ["AM", "AW", "BM", "BW", "CM", "CW"]
+    elif l == 2:
+        labels = ["Male", "Female"]
+    else:
+        labels = ["Asian", "Black", "Caucasian"]
     eerdiff = np.round(np.array(eer)[:, None] - np.array(eer)[None, :], 3)
     aucdiff = np.round(np.array(auc)[:, None] - np.array(auc)[None, :], 3)
     far_diff = np.round(np.array(far)[:, None] - np.array(far)[None, :], 3)
@@ -276,8 +280,12 @@ def get_heatmaps_by_id_and_group(cosines, group_ref, ref_id, m, path):
     identities = list(set(ref_id))
     avg_fars = np.zeros((len(identities), 6), dtype=np.float32)
     avg_frrs = np.zeros((len(identities), 6), dtype=np.float32)
-    labels_tot = ["AM", "AW", "BM", "BW", "CM", "CW"]
-    labels = [labels_tot[i] for i in groups]
+    if l == 6:
+        labels = ["AM", "AW", "BM", "BW", "CM", "CW"]
+    elif l == 2:
+        labels = ["Male", "Female"]
+    else:
+        labels = ["Asian", "Black", "Caucasian"]
     last = 0
     last_id = 0
     fprTOT, tprTOT, thresholdsTOT = metrics.roc_curve(m, NormalizeData(cosines), pos_label=1)
