@@ -1,6 +1,6 @@
-# Explaining Disparate Impacts in Face Recognition via Image Characteristics
+# Explaining Bias in Deep Face Recognition via Image Characteristics
 
-This is the official repository of the paper entitled "Explaining Disparate Impacts in Face Recognition via Image Characteristics".
+This is the official repository of the paper entitled "Explaining Bias in Deep Face Recognition via Image Characteristics".
 <br>
 <div align="center">
  <img src="./images/overview.png"  width="750" alt="ROC curve Example"/> 
