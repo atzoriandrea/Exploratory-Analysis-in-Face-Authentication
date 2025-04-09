@@ -1,6 +1,16 @@
 # Explaining Bias in Deep Face Recognition via Image Characteristics
 
-This is the official repository of the paper entitled "Explaining Bias in Deep Face Recognition via Image Characteristics".
+This is the official repository of the paper entitled "Explaining Bias in Deep Face Recognition via Image Characteristics", 
+published in: 2022 IEEE International Joint Conference on Biometrics (IJCB)
+ 
+<br>
+<div align="center">
+ <img src="IJCB_logo-900x207.png"  width="750" alt="Degradation Results"/> 
+</div>
+<br>
+
+The original paper is available <a href="https://ieeexplore.ieee.org/abstract/document/10007937/" target="_blank">here</a>.
+
 <br>
 <div align="center">
  <img src="./images/overview.png"  width="750" alt="ROC curve Example"/> 
@@ -10,7 +20,7 @@ This is the official repository of the paper entitled "Explaining Bias in Deep F
 We provide a Pytorch toolbox for Face Recognition training and testing. 
 It provides a training part with various SOTA Face Recognition backbones and heads and
 an evaluation part that:
-- Provides evaluations of the given model(s) in order to obtain metrics like ROC curves, AUCs, EERs, EERs@FAR1% etc.
+- Provides evaluations of the given model(s) in order to obtain metrics like ROC curves, AUCs, EERs, EERs@FAR1%, etc.
 <br>
 <div align="center">
  <img src="./images/ROC.png" height="250" width="250" alt="ROC curve Example"/> <img src="./images/EER.png" height="250" width="250" alt="EER graph Example"/>
