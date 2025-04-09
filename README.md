@@ -5,7 +5,7 @@ published in: 2022 IEEE International Joint Conference on Biometrics (IJCB)
  
 <br>
 <div align="center">
- <img src="IJCB_logo-900x207.png"  width="750" alt="IJCB Logo"/> 
+ <img src="images/IJCB_logo-900x207.png"  width="750" alt="IJCB Logo"/> 
 </div>
 <br>
 
